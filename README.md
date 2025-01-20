@@ -18,5 +18,5 @@ A relational database will store user profiles, messages, and preferences, optim
 
 The app will prioritize security, ease of use, and privacy, providing college students with a safe and engaging platform to meet and connect with others.
 
-#MEMBERS
+# Members
 Rijul, Ethan, Anay, Abhijeet
