@@ -1,6 +1,8 @@
-# CampusCupid
-this is will be creation of a new dating web app
+# Project Name
+Campus Cupid
 
+# CampusCupid
+This is will be creation of a new dating web app
 
 Problem Statement
 We’re creating a dating app specifically for college students, aiming to help them connect and build meaningful relationships in a fun and secure environment.
@@ -15,3 +17,6 @@ Database (MySQL, GORM, or PostgreSQL):
 A relational database will store user profiles, messages, and preferences, optimized for fast matching and data retrieval.
 
 The app will prioritize security, ease of use, and privacy, providing college students with a safe and engaging platform to meet and connect with others.
+
+#MEMBERS
+Rijul, Ethan, Anay, Abhijeet
