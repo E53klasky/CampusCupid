@@ -1,5 +1,5 @@
 # Project Name
-##Campus Cupid
+#Campus Cupid
 
 # CampusCupid
 This is will be creation of a new dating web app
