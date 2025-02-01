@@ -1,0 +1,51 @@
+version: '3.8'
+services:
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - 6379:6379
+    expose:
+      - 6379
+    volumes:
+      - redis-data:/data
+
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: "secret"
+      MYSQL_DATABASE: "dating_app"
+      MYSQL_USER: "admin"
+      MYSQL_PASSWORD: "secret"
+    expose:
+      - 3306
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  dating-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    depends_on:
+      - redis
+      - mysql
+    environment:
+      REDIS_URL: redis:6379
+      MYSQL_URL: "admin:secret@tcp(mysql:3306)/dating_app?parseTime=true"
+      HTTP_PORT: 8080
+      TOKEN_SYMMETRIC_KEY: "15345678900234567890143452789012"
+      EMAIL_NAME: "Dating App"
+      EMAIL_ADDRESS: "<your email address>"
+      EMAIL_PASSWORD: "<your email password>"    
+      GIN_MODE: "release"
+
+volumes:
+  redis-data:
+  mysql-data:
+    driver: local
