@@ -1,4 +1,7 @@
 /* General */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
 html, body, #root, .App {
   height: 100%;
   margin: 0;
@@ -12,7 +15,7 @@ html, body, #root, .App {
   height: 100%;
   font-family: 'Arial', sans-serif;
   background-color: #ffe4e6; /* Soft pink */
-  background-image: url('./Assets/BG.jpeg');
+  background-image: url('./handsome-bearded-man-hugs-woman-red-dress-tender-standing-golden-summer-field.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -23,16 +26,17 @@ html, body, #root, .App {
   background-color: rgba(250, 218, 221, 0.8); /* Semi-transparent pink */
   padding: 15px 20px;
   text-align: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(204, 82, 82, 0.1);
 }
 
 .App-header h1 {
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: #d6336c; /* Vibrant pink */
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  font-size: 4rem; /* Made larger to suit the decorative font */
+  font-weight: normal; /* Great Vibes looks better without bold */
+  color: #FF6B6B;
+  text-transform: none; /* Remove uppercase to keep the script style */
+  letter-spacing: normal; /* Remove letter spacing for script font */
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+  font-family: 'Great Vibes', cursive;
 }
 
 /* Left Branding Section */
@@ -44,7 +48,7 @@ html, body, #root, .App {
 
 .App-logo-section {
   background-color: transparent; /* Fully transparent */
-  color: #333;
+  color: #FFFFFF;
   padding: 40px 20px;
   display: flex;
   flex-direction: column;
@@ -62,7 +66,7 @@ html, body, #root, .App {
 .App-logo-section h2 {
   font-size: 1.8rem;
   font-weight: 600;
-  color: #d6336c;
+  color: #FF6B6B;
   margin-bottom: 10px;
   text-align: center;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
@@ -98,7 +102,7 @@ html, body, #root, .App {
 .App-content p {
   font-size: 1.2rem;
   margin-bottom: 20px;
-  color: #555;
+  color: #FFFFFF;
 }
 
 .App-buttons {
@@ -136,9 +140,9 @@ html, body, #root, .App {
   background-color: rgba(250, 218, 221, 0.8); /* Opaque footer */
   padding: 10px 20px;
   text-align: center;
-  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 -2px 8px rgba(182, 28, 28, 0.1);
   font-size: 0.9rem;
-  color: #555;
+  color: #df1111;
 }
 
 /* For responsive adjustments */
@@ -155,4 +159,12 @@ html, body, #root, .App {
   .App-content h1 {
     font-size: 2rem;
   }
+}
+
+body {
+  font-family: 'Lora', 'Montserrat';
+}
+
+p {
+  font-family: 'Lora', 'Montserrat';
 }

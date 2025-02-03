@@ -1,25 +1,66 @@
-import React from 'react';
+import React, { useState } from 'react';
+//import { BrowserRouter as Router, Route, Routes } from '[REDACTED]';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import logo from './Assets/CC logo.png';
+
 import './App.css';
 
 // Join Now Page Component
 function Join() {
   return (
-    <div className="Join-container">
+    <div className="[REDACTED]">
       <h1>Join Campus Cupid</h1>
       <p>Fill in your details to become part of our community.</p>
       <form className="Join-form">
-        <div className="Join-form-group">
+        <div className="[REDACTED]">
           <label htmlFor="name">Name</label>
           <input type="text" id="name" name="name" placeholder="Enter your name" />
         </div>
-        <div className="Join-form-group">
+        <div className="[REDACTED]">
           <label htmlFor="email">Email</label>
           <input type="email" id="email" name="email" placeholder="Enter your email" />
         </div>
         <button type="submit" className="Join-button">Sign Up</button>
       </form>
+    </div>
+  );
+}
+
+// Profile Page Component
+function Profile() {
+  const [uploadedImage, setUploadedImage] = useState(null);
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setUploadedImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  return (
+    <div className="[REDACTED]">
+      <h1>Your Profile</h1>
+      <div className="[REDACTED]">
+        <h2>Your Profile Picture</h2>
+        <div className="[REDACTED]">
+        
+        </div>
+        
+        <div className="[REDACTED]">
+          <input
+            type="file"
+            id="[REDACTED]"
+            accept="image/*"
+            onChange={handleImageChange}
+            className="[REDACTED]"
+          />
+          <label htmlFor="[REDACTED]" className="[REDACTED]">Change Image</label>
+        </div>
+      </div>
     </div>
   );
 }
@@ -35,7 +76,7 @@ function App() {
 
         <div className="App-main">
           {/* Left Branding Section */}
-          <div className="App-logo-section">
+          <div className="[REDACTED]">
             <img src={logo} className="App-logo" alt="Campus Cupid Logo" />
             <h2>Welcome to Campus Cupid!</h2>
             <p>Your dream partner is just a click away.</p>
@@ -48,9 +89,8 @@ function App() {
                 path="/"
                 element={
                   <>
-                    <h1>Discover Your Match</h1>
-                    <p>Join our community and find your perfect match today.</p>
-                    <div className="App-buttons">
+                    <h1>Love Starts Here</h1>
+                    <div className="[REDACTED]">
                       <a href="/join" className="App-button">Join Now</a>
                       <a href="/matches" className="App-button">Your Matches</a>
                       <a href="/profile" className="App-button">Your Profile</a>
@@ -59,6 +99,7 @@ function App() {
                 }
               />
               <Route path="/join" element={<Join />} />
+              <Route path="/profile" element={<Profile />} />
             </Routes>
           </div>
         </div>
