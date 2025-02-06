@@ -4,7 +4,8 @@ import (
 	"net/http"
 
 	_ "github.com/E53klasky/CampusCupid/docs" // Import Swagger docs
-	"github.com/gin-gonic/gin"                // Fix alias
+	"github.com/gin-gonic/gin"                // Gin framework
+	files "github.com/swaggo/files"           // Correct import for Swagger files
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
