@@ -20,3 +20,6 @@ The app will prioritize security, ease of use, and privacy, providing college st
 
 # Members
 Rijul, Ethan, Anay, Abhijeet
+
+
+# changes made to my repository
