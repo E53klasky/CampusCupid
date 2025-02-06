@@ -1,22 +1,17 @@
 package main
 
-/*
-Update main.go to Include Swagger Docs
-In your main.go file, you need to set up Swagger documentation for each API endpoint. We will use comments to define metadata for each route.
-
-Updated main.go with Swagger Annotations:
-*/
-
-
-package main
-
 import (
 	"net/http"
-	"github.com/gin-gonic/gin"
-	"github.com/swaggo/files" 
-	"github.com/swaggo/gin-swagger" 
-	_ "github.com/E53klasky/CampusCupid/docs" // Import the generated docs
+
+	_ "github.com/E53klasky/CampusCupid/docs" // Import Swagger docs
+	"github.com/gin-gonic/gin"                // Fix alias
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
+
+// APIError represents a standard error response
+type APIError struct {
+	Message string `json:"message"`
+}
 
 // User struct for data representation
 // @Description User represents a user in our system
@@ -34,7 +29,7 @@ var users = []User{
 
 // @title Go API with Swagger Docs
 // @version 1.0
-// @description This is a simple API that demonstrates integration with Swagger UI
+// @description This is a simple API demonstrating Swagger integration in Go
 // @host localhost:8080
 // @BasePath /api/v1
 func main() {
@@ -51,7 +46,7 @@ func main() {
 	r.DELETE("/users/:id", deleteUser)
 
 	// Run server
-	r.Run(":8080") 
+	r.Run(":8080")
 }
 
 // @Summary Get all users
@@ -70,7 +65,7 @@ func getUsers(c *gin.Context) {
 // @Produce json
 // @Param id path string true "User ID"
 // @Success 200 {object} User
-// @Failure 404 {object} gin.H{"message": "User not found"}
+// @Failure 404 {object} APIError
 // @Router /users/{id} [get]
 func getUserByID(c *gin.Context) {
 	id := c.Param("id")
@@ -80,7 +75,7 @@ func getUserByID(c *gin.Context) {
 			return
 		}
 	}
-	c.JSON(http.StatusNotFound, gin.H{"message": "User not found"})
+	c.JSON(http.StatusNotFound, APIError{Message: "User not found"})
 }
 
 // @Summary Create a new user
@@ -90,12 +85,12 @@ func getUserByID(c *gin.Context) {
 // @Produce json
 // @Param user body User true "User data"
 // @Success 201 {object} User
-// @Failure 400 {object} gin.H{"error": "Invalid input"}
+// @Failure 400 {object} APIError
 // @Router /users [post]
 func createUser(c *gin.Context) {
 	var newUser User
 	if err := c.ShouldBindJSON(&newUser); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusBadRequest, APIError{Message: "Invalid input"})
 		return
 	}
 	users = append(users, newUser)
@@ -110,13 +105,13 @@ func createUser(c *gin.Context) {
 // @Param id path string true "User ID"
 // @Param user body User true "Updated user data"
 // @Success 200 {object} User
-// @Failure 404 {object} gin.H{"message": "User not found"}
+// @Failure 404 {object} APIError
 // @Router /users/{id} [put]
 func updateUser(c *gin.Context) {
 	id := c.Param("id")
 	var updatedUser User
 	if err := c.ShouldBindJSON(&updatedUser); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusBadRequest, APIError{Message: "Invalid input"})
 		return
 	}
 	for i, user := range users {
@@ -126,24 +121,24 @@ func updateUser(c *gin.Context) {
 			return
 		}
 	}
-	c.JSON(http.StatusNotFound, gin.H{"message": "User not found"})
+	c.JSON(http.StatusNotFound, APIError{Message: "User not found"})
 }
 
 // @Summary Delete a user
 // @Description Remove a user by their ID
 // @Tags users
 // @Param id path string true "User ID"
-// @Success 200 {object} gin.H{"message": "User deleted"}
-// @Failure 404 {object} gin.H{"message": "User not found"}
+// @Success 200 {object} APIError
+// @Failure 404 {object} APIError
 // @Router /users/{id} [delete]
 func deleteUser(c *gin.Context) {
 	id := c.Param("id")
 	for i, user := range users {
 		if user.ID == id {
 			users = append(users[:i], users[i+1:]...)
-			c.JSON(http.StatusOK, gin.H{"message": "User deleted"})
+			c.JSON(http.StatusOK, APIError{Message: "User deleted"})
 			return
 		}
 	}
-	c.JSON(http.StatusNotFound, gin.H{"message": "User not found"})
+	c.JSON(http.StatusNotFound, APIError{Message: "User not found"})
 }
