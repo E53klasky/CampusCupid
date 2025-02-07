@@ -8,6 +8,17 @@ import (
 	"net/http"
 )
 
+// Register godoc
+// @Summary Register a new user
+// @Description Create a new user account
+// @Tags users
+// @Accept json
+// @Produce json
+// @Param user body models.User true "User details"
+// @Success 201 {object} map[string]string
+// @Failure 400 {object} map[string]string
+// @Failure 500 {object} map[string]string
+// @Router /register [post]
 func Register(c *gin.Context) {
 	var user models.User
 	if err := c.ShouldBindJSON(&user); err != nil {
@@ -28,11 +39,19 @@ func Register(c *gin.Context) {
 	c.JSON(http.StatusCreated, gin.H{"message": "User registered successfully"})
 }
 
+// Login godoc
+// @Summary Login a user
+// @Description Authenticate a user and return a JWT token
+// @Tags users
+// @Accept json
+// @Produce json
+// @Param credentials body models.LoginRequest true "User login credentials"
+// @Success 200 {object} map[string]string
+// @Failure 400 {object} map[string]string
+// @Failure 401 {object} map[string]string
+// @Router /login [post]
 func Login(c *gin.Context) {
-	var input struct {
-		Username string `json:"username"`
-		Password string `json:"password"`
-	}
+	var input models.LoginRequest // Use the LoginRequest struct
 
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -55,6 +74,16 @@ func Login(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"token": token})
 }
 
+// GetProfile godoc
+// @Summary Get user profile
+// @Description Retrieve the profile of the authenticated user
+// @Tags users
+// @Accept json
+// @Produce json
+// @Security ApiKeyAuth
+// @Success 200 {object} models.User
+// @Failure 404 {object} map[string]string
+// @Router /profile [get]
 func GetProfile(c *gin.Context) {
 	userID := c.MustGet("userID").(uint)
 

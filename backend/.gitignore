@@ -46,3 +46,7 @@ build/
 
 # Ignore compiled binaries
 main
+
+# Ignore generated files
+/docs/swagger.json
+/docs/docs.go

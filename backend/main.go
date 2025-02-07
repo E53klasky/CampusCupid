@@ -8,6 +8,11 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
+
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
+
+	_ "datingapp/docs"
 )
 
 func init() {
@@ -16,10 +21,26 @@ func init() {
 	}
 }
 
+// @title CampusCupid API
+// @version 1.0
+// @description This is the backend API for the CampusCupid dating app.
+// @termsOfService http://swagger.io/terms/
+// @contact.name API Support
+// @contact.email support@campuscupid.com
+// @license.name MIT
+// @license.url https://opensource.org/licenses/MIT
+// @host localhost:8080
+// @BasePath /
+// @securityDefinitions.apikey ApiKeyAuth
+// @in header
+// @name Authorization
 func main() {
 	database.Connect()
 
 	r := gin.Default()
+
+	// Swagger route
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	// Public routes
 	r.POST("/register", handlers.Register)
