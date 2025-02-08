@@ -15,17 +15,45 @@ definitions:
       username:
         type: string
     type: object
+  models.UpdatePreferencesRequest:
+    properties:
+      age_range:
+        type: string
+      distance:
+        type: integer
+      gender_preference:
+        type: string
+    type: object
+  models.UpdateProfileRequest:
+    properties:
+      bio:
+        type: string
+      interests:
+        type: string
+    type: object
   models.User:
     properties:
+      ageRange:
+        type: string
+      bio:
+        type: string
       createdAt:
         type: string
       deletedAt:
         $ref: '#/definitions/gorm.DeletedAt'
+      distance:
+        type: integer
       email:
+        type: string
+      genderPreference:
         type: string
       id:
         type: integer
+      interests:
+        type: string
       password:
+        type: string
+      profilePictureURL:
         type: string
       updatedAt:
         type: string
@@ -45,6 +73,31 @@ info:
   title: CampusCupid API
   version: "1.0"
 paths:
+  /admin/users:
+    get:
+      consumes:
+      - application/json
+      description: Fetch a list of all users (for admin purposes)
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.User'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Get all users (Admin)
+      tags:
+      - admin
   /login:
     post:
       consumes:
@@ -81,7 +134,91 @@ paths:
       summary: Login a user
       tags:
       - users
+  /preferences:
+    get:
+      consumes:
+      - application/json
+      description: Fetch the authenticated user's matching preferences
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.User'
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Get user preferences
+      tags:
+      - users
+    put:
+      consumes:
+      - application/json
+      description: Update the authenticated user's matching preferences
+      parameters:
+      - description: Preferences update details
+        in: body
+        name: preferences
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdatePreferencesRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Update user preferences
+      tags:
+      - users
   /profile:
+    delete:
+      consumes:
+      - application/json
+      description: Delete the authenticated user's account
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Delete user account
+      tags:
+      - users
     get:
       consumes:
       - application/json
@@ -102,6 +239,80 @@ paths:
       security:
       - ApiKeyAuth: []
       summary: Get user profile
+      tags:
+      - users
+    put:
+      consumes:
+      - application/json
+      description: Update the authenticated user's profile information
+      parameters:
+      - description: Profile update details
+        in: body
+        name: profile
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateProfileRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Update user profile
+      tags:
+      - users
+  /profile/picture:
+    post:
+      consumes:
+      - multipart/form-data
+      description: Upload or change the authenticated user's profile picture
+      parameters:
+      - description: Profile picture
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Upload profile picture
       tags:
       - users
   /register:

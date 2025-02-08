@@ -7,14 +7,31 @@ import (
 
 type User struct {
 	gorm.Model
-	Username string `gorm:"unique;not null"`
-	Email    string `gorm:"unique;not null"`
-	Password string `gorm:"not null"`
+	Username          string `gorm:"unique;not null"`
+	Email             string `gorm:"unique;not null"`
+	Password          string `gorm:"not null"`
+	Bio               string `gorm:"type:text"`
+	Interests         string `gorm:"type:text"`
+	ProfilePictureURL string `gorm:"type:text"`
+	AgeRange          string `gorm:"type:varchar(50)"`
+	Distance          int    `gorm:"type:int"`
+	GenderPreference  string `gorm:"type:varchar(50)"`
 }
 
 type LoginRequest struct {
 	Username string `json:"username"`
 	Password string `json:"password"`
+}
+
+type UpdateProfileRequest struct {
+	Bio       string `json:"bio"`
+	Interests string `json:"interests"`
+}
+
+type UpdatePreferencesRequest struct {
+	AgeRange         string `json:"age_range"`
+	Distance         int    `json:"distance"`
+	GenderPreference string `json:"gender_preference"`
 }
 
 func (u *User) HashPassword(password string) error {

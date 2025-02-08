@@ -51,6 +51,18 @@ func main() {
 	auth.Use(middleware.AuthMiddleware())
 	{
 		auth.GET("/profile", handlers.GetProfile)
+		auth.PUT("/profile", handlers.UpdateProfile)
+		auth.DELETE("/profile", handlers.DeleteProfile)
+		auth.POST("/profile/picture", handlers.UploadProfilePicture)
+		auth.PUT("/preferences", handlers.UpdatePreferences)
+		auth.GET("/preferences", handlers.GetPreferences)
+	}
+
+	// Admin routes
+	admin := r.Group("/admin")
+	admin.Use(middleware.AuthMiddleware()) // Add admin-specific middleware if needed
+	{
+		admin.GET("/users", handlers.GetAllUsers)
 	}
 
 	r.Run(":8080")
