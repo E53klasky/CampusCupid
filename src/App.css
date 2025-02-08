@@ -2,6 +2,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
 html, body, #root, .App {
   height: 100%;
   margin: 0;
@@ -13,8 +14,8 @@ html, body, #root, .App {
   display: grid;
   grid-template-rows: auto 1fr auto; /* Header, Content, Footer */
   height: 100%;
-  font-family: 'Arial', sans-serif;
-  background-color: #ffe4e6; /* Soft pink */
+  font-family: 'Roboto', sans-serif; /* Using Roboto as the primary font */
+  background-color: #FFFFFF; /* White background instead of yellow */
   background-image: url('./handsome-bearded-man-hugs-woman-red-dress-tender-standing-golden-summer-field.jpg');
   background-size: cover;
   background-position: center;
@@ -23,31 +24,31 @@ html, body, #root, .App {
 
 /* Header Section */
 .App-header {
-  background-color: rgba(250, 218, 221, 0.8); /* Semi-transparent pink */
+  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
   padding: 15px 20px;
   text-align: center;
   box-shadow: 0 2px 8px rgba(204, 82, 82, 0.1);
 }
 
 .App-header h1 {
-  font-size: 4rem; /* Made larger to suit the decorative font */
-  font-weight: normal; /* Great Vibes looks better without bold */
+  font-size: 2.5rem; /* Smaller size for the heading */
+  font-weight: normal;
   color: #FF6B6B;
-  text-transform: none; /* Remove uppercase to keep the script style */
-  letter-spacing: normal; /* Remove letter spacing for script font */
+  text-transform: none;
+  letter-spacing: normal;
   text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
   font-family: 'Great Vibes', cursive;
 }
 
-/* Left Branding Section */
-.App-main {
-  display: flex;
-  flex: 1;
-  overflow: hidden;
+.App-logo { /* Logo image this should be changed for an actul iage later*/
+  height: 120px;
+  width: auto;
+  margin-bottom: 20px;
 }
 
+/* Left Branding Section */
 .App-logo-section {
-  background-color: transparent; /* Fully transparent */
+  background-color: transparent;
   color: #FFFFFF;
   padding: 40px 20px;
   display: flex;
@@ -55,12 +56,6 @@ html, body, #root, .App {
   align-items: center;
   justify-content: center;
   flex-basis: 20%; /* Thinner branding section */
-}
-
-.App-logo {
-  height: 120px;
-  width: auto;
-  margin-bottom: 20px;
 }
 
 .App-logo-section h2 {
@@ -92,11 +87,11 @@ html, body, #root, .App {
 .App-content h1 {
   font-size: 2.5rem;
   font-weight: bold;
-  color: #060505;
+  color: #ffffff;
   margin-bottom: 20px;
   text-transform: uppercase;
   letter-spacing: 2px;
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+  text-shadow: 2px 2px 8px rgba(2, 0, 0, 0.2);
 }
 
 .App-content p {
@@ -137,7 +132,7 @@ html, body, #root, .App {
 
 /* Footer Section */
 .App-footer {
-  background-color: rgba(250, 218, 221, 0.8); /* Opaque footer */
+  background-color: rgba(255, 255, 255, 0.8); /* White footer */
   padding: 10px 20px;
   text-align: center;
   box-shadow: 0 -2px 8px rgba(182, 28, 28, 0.1);
@@ -145,7 +140,7 @@ html, body, #root, .App {
   color: #df1111;
 }
 
-/* For responsive adjustments */
+/* Responsive adjustments */
 @media (max-width: 768px) {
   .App-logo-section {
     flex-basis: 25%; /* Slightly larger for smaller screens */
@@ -161,44 +156,44 @@ html, body, #root, .App {
   }
 
   .join-container {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(199, 167, 194, 0.95);
     backdrop-filter: blur(10px);
     border-radius: 20px;
     padding: 2rem;
     max-width: 500px;
     width: 90%;
     margin: 2rem auto;
-    box-shadow: 0 8px 32px rgba(214, 51, 108, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(235, 57, 131, 0.2);
+    border: 1px solid rgba(97, 1, 49, 0);
   }
-  
+
   .join-container h1 {
     font-family: 'Great Vibes', cursive;
     color: #d6336c;
-    font-size: 3rem;
+    font-size: 2.5rem; /* Smaller for responsive view */
     margin-bottom: 1rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.1);
   }
-  
+
   .join-container p {
-    color: #666;
+    color: #ff0000;
     font-family: 'Roboto', sans-serif;
     margin-bottom: 2rem;
   }
-  
+
   .join-form {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
   }
-  
+
   .form-group {
     display: flex;
     flex-direction: column;
     text-align: left;
     gap: 0.5rem;
   }
-  
+
   .form-group label {
     color: #d6336c;
     font-weight: 500;
@@ -206,20 +201,20 @@ html, body, #root, .App {
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }
-  
+
   .form-group input[type="text"],
   .form-group input[type="email"],
   .form-group input[type="date"],
   .form-group select,
   .form-group textarea {
     padding: 12px 16px;
-    border: 2px solid rgba(214, 51, 108, 0.2);
+    border: 2px solid rgba(155, 138, 144, 0.2);
     border-radius: 12px;
     font-size: 1rem;
     transition: all 0.3s ease;
     background: rgba(255, 255, 255, 0.9);
   }
-  
+
   .form-group input:focus,
   .form-group select:focus,
   .form-group textarea:focus {
@@ -227,14 +222,14 @@ html, body, #root, .App {
     border-color: #d6336c;
     box-shadow: 0 0 0 3px rgba(214, 51, 108, 0.1);
   }
-  
+
   .checkbox-group {
     display: flex;
     gap: 1.5rem;
     flex-wrap: wrap;
     margin-top: 0.5rem;
   }
-  
+
   .checkbox-group label {
     display: flex;
     align-items: center;
@@ -242,22 +237,22 @@ html, body, #root, .App {
     font-weight: normal;
     text-transform: none;
     letter-spacing: normal;
-    color: #666;
+    color: #fc0000;
     cursor: pointer;
   }
-  
+
   .checkbox-group input[type="checkbox"] {
     width: 18px;
     height: 18px;
     accent-color: #d6336c;
     cursor: pointer;
   }
-  
+
   textarea {
     min-height: 100px;
     resize: vertical;
   }
-  
+
   .join-button {
     background-color: #d6336c;
     color: white;
@@ -273,35 +268,34 @@ html, body, #root, .App {
     letter-spacing: 1px;
     box-shadow: 0 4px 15px rgba(214, 51, 108, 0.3);
   }
-  
+
   .join-button:hover {
     background-color: #bf2e61;
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(214, 51, 108, 0.4);
   }
-  
+
   .join-button:active {
     transform: translateY(0);
   }
-  
-  /* Responsive adjustments */
+
+  /* Responsive adjustments for join-container */
   @media (max-width: 768px) {
     .join-container {
       padding: 1.5rem;
       margin: 1rem;
       width: auto;
     }
-  
+
     .checkbox-group {
       flex-direction: column;
       gap: 0.75rem;
     }
-  
+
     .join-container h1 {
-      font-size: 2.5rem;
+      font-size: 2.5rem; /* Smaller heading */
     }
   }
-  
 }
 
 body {
