@@ -3,7 +3,6 @@ package main
 import (
 	"datingapp/database"
 	"datingapp/handlers"
-	"datingapp/middleware"
 	"log"
 
 	"github.com/gin-gonic/gin"
@@ -16,6 +15,7 @@ import (
 )
 
 func init() {
+	// Load environment variables from .env file
 	if err := godotenv.Load(); err != nil {
 		log.Fatal("Error loading .env file")
 	}
@@ -31,39 +31,20 @@ func init() {
 // @license.url https://opensource.org/licenses/MIT
 // @host localhost:8080
 // @BasePath /
-// @securityDefinitions.apikey ApiKeyAuth
-// @in header
-// @name Authorization
 func main() {
+	// Initialize database connection
 	database.Connect()
 
+	// Create a new Gin router instance
 	r := gin.Default()
 
-	// Swagger route
+	// Swagger documentation route
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
-	// Public routes
+	// Public authentication routes
 	r.POST("/register", handlers.Register)
 	r.POST("/login", handlers.Login)
 
-	// Protected routes
-	auth := r.Group("/")
-	auth.Use(middleware.AuthMiddleware())
-	{
-		auth.GET("/profile", handlers.GetProfile)
-		auth.PUT("/profile", handlers.UpdateProfile)
-		auth.DELETE("/profile", handlers.DeleteProfile)
-		auth.POST("/profile/picture", handlers.UploadProfilePicture)
-		auth.PUT("/preferences", handlers.UpdatePreferences)
-		auth.GET("/preferences", handlers.GetPreferences)
-	}
-
-	// Admin routes
-	admin := r.Group("/admin")
-	admin.Use(middleware.AuthMiddleware()) // Add admin-specific middleware if needed
-	{
-		admin.GET("/users", handlers.GetAllUsers)
-	}
-
+	// Start the server on port 8080
 	r.Run(":8080")
 }
