@@ -52,8 +52,7 @@ func main() {
 	// new routes once logged in
 	// profile info
 	// profile info post and get
-
-	// r.GET("/profile", handlers.getUserProfile)
+	r.GET("/profile/:user_id", handlers.GetUserProfile)
 
 	// Start the server on port 8080
 	r.Run(":8080")

@@ -107,4 +107,40 @@ func Login(c *gin.Context) {
 	})
 }
 
-// new getUserProfile
+// getUserProfile retrieves the profile details of the user by user_id
+// @Summary Get user profile by user_id
+// @Description Get the profile details of a user using the user_id
+// @Tags users
+// @Accept json
+// @Produce json
+// @Param user_id path uint true "User ID"
+// @Success 200 {object} models.User
+// @Failure 400 {object} map[string]string
+// @Failure 404 {object} map[string]string
+// @Failure 500 {object} map[string]string
+// @Router /profile/{user_id} [get]
+func GetUserProfile(c *gin.Context) {
+	// extract user_id
+	var userID = c.Params.ByName("user_id")
+
+	// Retrieve the user info from the database
+	var user models.User
+	if err := database.DB.Where("id = ?", userID).First(&user).Error; err != nil {
+		// If user not found, return 404
+		c.JSON(http.StatusNotFound, gin.H{"error": "User not found"})
+		return
+	}
+
+	// Return the user's profile details
+	c.JSON(http.StatusOK, gin.H{
+		"id":                user.ID,
+		"username":          user.Username,
+		"email":             user.Email,
+		"bio":               user.Bio,
+		"interests":         user.Interests,
+		"profile_picture":   user.ProfilePictureURL,
+		"age_range":         user.AgeRange,
+		"distance":          user.Distance,
+		"gender_preference": user.GenderPreference,
+	})
+}
