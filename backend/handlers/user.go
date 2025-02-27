@@ -144,3 +144,5 @@ func GetUserProfile(c *gin.Context) {
 		"gender_preference": user.GenderPreference,
 	})
 }
+
+// enter user information
