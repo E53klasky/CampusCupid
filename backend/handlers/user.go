@@ -107,7 +107,7 @@ func Login(c *gin.Context) {
 	})
 }
 
-// getUserProfile retrieves the profile details of the user by user_id
+// GetUserProfile retrieves the profile details of the user by user_id
 // @Summary Get user profile by user_id
 // @Description Get the profile details of a user using the user_id
 // @Tags users

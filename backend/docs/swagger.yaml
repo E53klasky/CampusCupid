@@ -10,6 +10,37 @@ definitions:
         type: string
     type: object
   models.User:
+    properties:
+      ageRange:
+        description: Age range of the user (string of max length 50)
+        type: string
+      bio:
+        description: Bio can be any length (stored as text)
+        type: string
+      distance:
+        description: Distance preference (in integer)
+        type: integer
+      email:
+        description: Unique and non-nullable email
+        type: string
+      genderPreference:
+        description: Gender preference for potential matches
+        type: string
+      id:
+        description: Explicitly define ID field and set it as the primary key
+        type: integer
+      interests:
+        description: Interests can be a large text field
+        type: string
+      password:
+        description: Non-nullable password field
+        type: string
+      profilePictureURL:
+        description: URL of the profile picture (stored as text)
+        type: string
+      username:
+        description: Unique and non-nullable username
+        type: string
     type: object
 host: localhost:8080
 info:
@@ -58,6 +89,45 @@ paths:
               type: string
             type: object
       summary: Login a user
+      tags:
+      - users
+  /profile/{user_id}:
+    get:
+      consumes:
+      - application/json
+      description: Get the profile details of a user using the user_id
+      parameters:
+      - description: User ID
+        in: path
+        name: user_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.User'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get user profile by user_id
       tags:
       - users
   /register:
