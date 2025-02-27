@@ -1,5 +1,9 @@
 package main
 
+// go run main.go
+// swag init
+// go mod tidy
+
 import (
 	"datingapp/database"
 	"datingapp/handlers"
@@ -44,6 +48,12 @@ func main() {
 	// Public authentication routes
 	r.POST("/register", handlers.Register)
 	r.POST("/login", handlers.Login)
+
+	// new routes once logged in
+	// profile info
+	// profile info post and get
+
+	// r.GET("/profile", handlers.getUserProfile)
 
 	// Start the server on port 8080
 	r.Run(":8080")

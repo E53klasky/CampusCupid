@@ -100,6 +100,11 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	// Return the generated token in the response
-	c.JSON(http.StatusOK, gin.H{"token": tokenString})
+	// Return the JWT token and user ID
+	c.JSON(http.StatusOK, gin.H{
+		"token":   tokenString,
+		"user_id": user.ID,
+	})
 }
+
+// new getUserProfile

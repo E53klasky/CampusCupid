@@ -2,13 +2,12 @@ package models
 
 import (
 	"golang.org/x/crypto/bcrypt" // Importing the bcrypt package for hashing passwords
-	"gorm.io/gorm"               // GORM ORM package for database handling
 )
 
 // User represents the user model in the database
 // It contains fields like username, email, password, etc.
 type User struct {
-	gorm.Model               // Embedding gorm.Model for automatic ID, timestamps, etc.
+	ID                uint   `gorm:"primaryKey"`       // Explicitly define ID field and set it as the primary key
 	Username          string `gorm:"unique;not null"`  // Unique and non-nullable username
 	Email             string `gorm:"unique;not null"`  // Unique and non-nullable email
 	Password          string `gorm:"not null"`         // Non-nullable password field
