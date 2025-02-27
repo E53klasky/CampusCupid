@@ -3,8 +3,10 @@ definitions:
   models.LoginRequest:
     properties:
       password:
+        description: Password for login
         type: string
       username:
+        description: Username for login
         type: string
     type: object
   models.User:
